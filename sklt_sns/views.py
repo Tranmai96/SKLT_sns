@@ -3,7 +3,7 @@ from django.http import HttpResponse
 # Create your views here.
 
 def home(request):
-    return render(request, 'sklt_sns/main.html')
+    return render(request, 'sklt_sns/home.html')
 
 def post_detail(request):
     return HttpResponse('Post detail')
