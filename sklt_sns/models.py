@@ -9,7 +9,7 @@ class User(models.Model):
 	id_num = models.FloatField()
 	email = models.CharField(max_length=200, null=True)
 	date_created = models.DateTimeField(auto_now_add=True, null=True)
-
+    #image = models.FloatField(upload_to='images/', blank=True)
 
 	def __str__(self):
 		return self.name

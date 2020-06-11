@@ -1,15 +1,16 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import *
 # Create your views here.
 
 def home(request):
-    posts=Post.objects.order_by('created_date')
+    posts=Post.objects.order_by('-created_date')
     latest_posts = []
-    latest_posts.append(posts[2:7])
+    for i in range(6):
+        latest_posts.append(posts[i])
 
     context={'posts':posts,'latest_posts':latest_posts}
     return render(request, 'sklt_sns/home.html',context)
-    return render(request, 'sklt_sns/home.html')
 
 def post_detail(request):
     return HttpResponse('Post detail')
