@@ -13,17 +13,11 @@ class User(models.Model):
 		return self.name
 
 
-
 class Post(models.Model):
     author = models.ForeignKey('User', on_delete=models.CASCADE)
     text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
-
-
-class Ine(models.Model):
-    ip_address = models.CharField('IPアドレス', max_length=20)
-    parent = models.ForeignKey(Post, on_delete=models.CASCADE) 
 
 
 class Comment(models.Model):

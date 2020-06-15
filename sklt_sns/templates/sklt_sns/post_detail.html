@@ -1,53 +1,53 @@
 {%  extends 'sklt_sns/main.html' %}
 {% block content %}
 
-<div class="my-3 p-3 bg-white rounded shadow-sm">
-<div class="media">
- <img src="..." class="mr-3" alt="...">
+<main role="main" class="container">
+ <div class="d-flex align-items-center p-3 my-3 bg-white rounded shadow-sm">
+ <div class="media">
   <div class="media-body">
     <div class="post">
+       <!-管理者でログインしているユーザーのみにリンクを表示->
+       {% if user.is_authenticated %}
+       <!-編集ボタンと削除ボタンを表示->
+       <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+       <a class="btn btn-default" href="{% url 'post_remove' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+       {% endif %}
+       <div class="lh-100">
+        <strong>user.name</strong>
+        <form action="{% url 'post_detail' post.pk %}" method="post">
+          {% csrf_token %}
+          <input type="submit" name="good" value="いいね"　id="test">{{ post.good }}
+        </form>
+       </div>
+       <div class="date">
+        <small>{{ post.created_date }}</small>
+       </div>
       <p>{{ post.text|linebreaksbr }}</p>
+      <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray"></p>
     </div>
 
-    <div class="media mt-3">
-      <a class="mr-3" href="#">
-        <img src="..." class="mr-3" alt="...">
-      </a>
-      <div class="media-body">
-
-        {% for comment in post.comments.all %}
-           <div class="comment">
-             <div class="date">{{ comment.created_date }}</div>
-               <strong>{{ comment.author }}</strong>
-               <p>{{ comment.text|linebreaks }}</p>
+    <main role="main" class="container">
+      <div class="media mt-3">
+        <a class="mr-5"></a>
+         <div class="media-body">
+          {% for comment in post.comments.all %}
+             <div class="comment">
+                 {{ comment.author }}
+                 <div class="date">
+                  <small>{{ comment.created_date }}</small>
+                 </div>
+                 {{ comment.text|linebreaks }}
+                 <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray"></p>
              </div>
-            </div>
-        {% empty %}
+          {% empty %}
             <p>No comments here yet :(</p>
-        {% endfor %}
+          {% endfor %}
+         </div>
       </div>
-    </div>
+    </main>
   </div>
-</div>
-</div>
-
-
-{% load static %}
-
-<script src="static/js/jQuery.js"></script>
-<script scr="static/js/post_detail.js"></script>
-
-{% if ine_flag %}
- <div id="Ine" class="on mt-5" data-href="{% url 'ine' pk=post.pk %}">
-{% else %}
- <div id="Ine" class="mt-5" data-href="{% url 'ine' pk=post.pk %}">
-{% endif %}
-    <span>この記事をいいね！と思った方はぜひ押していってください！</span><br>
-    <i class="fa fa-thumbs-up"></i> 
-    <span class="ine-count">({{ ine_count }})</span>
-    <span class="ine-msg"></span>
-</div>
-
-
+ </div>
+ </div>
+</main>
 
 {% endblock %}
