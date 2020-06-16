@@ -5,7 +5,7 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('post_detail',views.post_detail),
-    path('profile',views.profile),
+    path('profile/',views.profile),
     path('log_in_page',views.log_in_page),
     #各記事の個別ページ
     path('post_detail/<int:pk>/', views.post_detail, name='post_detail'),
