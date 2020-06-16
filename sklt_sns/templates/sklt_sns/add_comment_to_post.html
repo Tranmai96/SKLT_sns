@@ -1,0 +1,11 @@
+<!-コメント投稿画面の編集->
+
+{%  extends 'sklt_sns/main.html' %}
+
+{% block content %}
+    <h1>nwe comment</h1>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">send</button>
+    </form>
+{% endblock %}
